@@ -1,6 +1,5 @@
 # Node.js
 /frontend/node_modules
-/frontend/build
 
 # Java/Spring Boot
 /backend/target
