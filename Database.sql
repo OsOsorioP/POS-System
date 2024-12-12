@@ -186,3 +186,38 @@ AFTER INSERT OR UPDATE OR DELETE
 ON inventario
 FOR EACH ROW
 EXECUTE FUNCTION fn_registrar_auditoria();
+
+
+-- Trigger para Actualizar Inventario
+CREATE OR REPLACE FUNCTION actualizar_inventario() RETURNS TRIGGER AS $$
+BEGIN
+    -- Consultar la cantidad vendida del producto en la transacción
+    UPDATE inventario
+    SET inv_stock_actual = inv_stock_actual - NEW.det_cantidad
+    WHERE inv_prod_id = NEW.det_prod_id;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_actualizar_inventario
+AFTER INSERT ON detalles_venta
+FOR EACH ROW
+EXECUTE FUNCTION actualizar_inventario();
+
+
+-- Trigger para Validar Integridad de Datos en Productos
+CREATE OR REPLACE FUNCTION validar_precio_producto() RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.prod_precio_venta < NEW.prod_precio_costo THEN
+        RAISE EXCEPTION 'El precio de venta no puede ser menor que el precio de costo';
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_validar_precio_producto
+AFTER INSERT OR UPDATE ON productos
+FOR EACH ROW
+EXECUTE FUNCTION validar_precio_producto();
