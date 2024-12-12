@@ -26,6 +26,9 @@ public class ProveedorServicio {
 
     // Crear nuevo proveedor
     public ProveedorEntidad crearProveedor(ProveedorEntidad proveedor) {
+        if (proveedorRepository.existsById(proveedor.getId())) {
+            throw new RuntimeException("El ID ya existe");
+        }
         return proveedorRepository.save(proveedor);
     }
 

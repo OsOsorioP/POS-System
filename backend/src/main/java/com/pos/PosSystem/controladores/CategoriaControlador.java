@@ -35,6 +35,7 @@ public class CategoriaControlador {
         return ResponseEntity.ok(categoriaServicio.crearCategoria(categoria));
     }
 
+
     // Actualizar categoría
     @PutMapping("/{id}")
     public ResponseEntity<CategoriaEntidad> actualizarCategoria(@PathVariable Integer id, @RequestBody CategoriaEntidad categoriaDetalles) {

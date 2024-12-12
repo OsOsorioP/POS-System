@@ -26,6 +26,9 @@ public class ClienteServicio {
 
     // Crear nuevo cliente
     public ClienteEntidad crearCliente(ClienteEntidad cliente) {
+        if (clienteRepository.existsById(cliente.getId())) {
+            throw new RuntimeException("El ID ya existe");
+        }
         return clienteRepository.save(cliente);
     }
 

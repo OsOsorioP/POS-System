@@ -26,6 +26,9 @@ public class DetalleVentaServicio {
 
     // Crear nueva categoría
     public DetalleVentaEntidad crearDetalleVenta(DetalleVentaEntidad detalleVenta) {
+        if (detalleVentaRepository.existsById(detalleVenta.getId())) {
+            throw new RuntimeException("El ID ya existe");
+        }
         return detalleVentaRepository.save(detalleVenta);
     }
 

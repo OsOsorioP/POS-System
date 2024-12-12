@@ -26,6 +26,9 @@ public class ProductoServicio {
 
     // Crear nuevo producto
     public ProductoEntidad crearProducto(ProductoEntidad producto) {
+        if (productoRepository.existsById(producto.getId())) {
+            throw new RuntimeException("El ID ya existe");
+        }
         return productoRepository.save(producto);
     }
 

@@ -26,6 +26,9 @@ public class InventarioServicio {
 
     // Crear nueva categoría
     public InventarioEntidad crearInventario(InventarioEntidad inventario) {
+        if (inventarioRepository.existsById(inventario.getId())) {
+            throw new RuntimeException("El ID ya existe");
+        }
         return inventarioRepository.save(inventario);
     }
 

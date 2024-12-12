@@ -22,9 +22,9 @@ public class AuditoriaControlador {
     }
 
     // Crear nueva categoría
-    @PostMapping
-    public ResponseEntity<AuditoriaEntidad> crearAuditoria(@RequestBody AuditoriaEntidad auditoria) {
-        return ResponseEntity.ok(auditoriaServicio.crearAuditoria(auditoria));
-    }
+    //@PostMapping
+    //public ResponseEntity<AuditoriaEntidad> crearAuditoria(@RequestBody AuditoriaEntidad auditoria) {
+      //  return ResponseEntity.ok(auditoriaServicio.crearAuditoria(auditoria));
+    //}
 
 }

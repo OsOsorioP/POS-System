@@ -26,6 +26,9 @@ public class MetodoPagoServicio {
 
     // Crear nueva categoría
     public MetodoPagoEntidad crearMetodoPago(MetodoPagoEntidad metodoPago) {
+        if (metodoPagoRepository.existsById(metodoPago.getId())) {
+            throw new RuntimeException("El ID ya existe");
+        }
         return metodoPagoRepository.save(metodoPago);
     }
 

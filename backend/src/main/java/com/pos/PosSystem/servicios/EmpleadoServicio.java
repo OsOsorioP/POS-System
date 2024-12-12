@@ -26,6 +26,9 @@ public class EmpleadoServicio {
 
     // Crear nueva categoría
     public EmpleadoEntidad crearEmpleado(EmpleadoEntidad empleado) {
+        if (empleadoRepository.existsById(empleado.getId())) {
+            throw new RuntimeException("El ID ya existe");
+        }
         return empleadoRepository.save(empleado);
     }
 

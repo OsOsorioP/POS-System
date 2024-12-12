@@ -26,6 +26,9 @@ public class TransaccionVentaServicio {
 
     // Crear nueva categoría
     public TransaccionVentaEntidad crearTransaccionVenta(TransaccionVentaEntidad transaccionVenta) {
+        if (transaccionVentaRepository.existsById(transaccionVenta.getId())) {
+            throw new RuntimeException("El ID ya existe");
+        }
         return transaccionVentaRepository.save(transaccionVenta);
     }
 

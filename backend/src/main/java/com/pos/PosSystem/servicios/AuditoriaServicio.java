@@ -18,8 +18,4 @@ public class AuditoriaServicio {
         return auditoriaRepository.findAll();
     }
 
-    // Crear nueva auditoría
-    public AuditoriaEntidad crearAuditoria(AuditoriaEntidad auditoria) {
-        return auditoriaRepository.save(auditoria);
-    }
 }
