@@ -1,13 +1,13 @@
-package com.pos.backend;
+package com.pos.PosSystem;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BackendApplication {
+public class PosSystemApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BackendApplication.class, args);
+		SpringApplication.run(PosSystemApplication.class, args);
 	}
 
 }

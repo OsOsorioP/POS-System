@@ -1,10 +1,10 @@
-package com.pos.backend;
+package com.pos.PosSystem;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BackendApplicationTests {
+class PosSystemApplicationTests {
 
 	@Test
 	void contextLoads() {
