@@ -1,41 +1,63 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './../../assets/styles/clientes.css';
 import { FaTrash, FaEdit } from 'react-icons/fa';
 
 const Clientes = () => {
-  const [clientes, setClientes] = useState([
-    { id: 1, nombre: 'Juan', apellido: 'Pérez', telefono: '123456789', correo: 'juan.perez@gmail.com', puntos: 120, fechaCreacion: '2024-12-01' },
-    { id: 2, nombre: 'Ana', apellido: 'López', telefono: '987654321', correo: 'ana.lopez@gmail.com', puntos: 200, fechaCreacion: '2024-12-05' },
-  ]);
+  const [clientes, setClientes] = useState([]); // Clientes cargados desde el backend
   const [view, setView] = useState('tabla'); // Controla la vista actual
   const [clienteEditando, setClienteEditando] = useState(null);
+
+  useEffect(() => {
+    // Cargar clientes desde el backend
+    fetch('http://localhost:8080/clientes')
+      .then((res) => res.json())
+      .then((data) => setClientes(data))
+      .catch((err) => console.error('Error al cargar clientes:', err));
+  }, []);
 
   const handleAddCliente = (e) => {
     e.preventDefault();
 
     const form = e.target;
     const nuevoCliente = {
-      id: clienteEditando ? clienteEditando.id : clientes.length + 1,
       nombre: form.nombre.value,
       apellido: form.apellido.value,
       telefono: form.telefono.value,
       correo: form.correo.value,
       puntos: parseInt(form.puntos.value),
-      fechaCreacion: clienteEditando ? clienteEditando.fechaCreacion : new Date().toISOString().split('T')[0],
     };
 
     if (clienteEditando) {
-      setClientes((prevClientes) =>
-        prevClientes.map((cliente) =>
-          cliente.id === clienteEditando.id ? nuevoCliente : cliente
-        )
-      );
-      setClienteEditando(null);
+      // Actualizar cliente existente
+      fetch(`http://localhost:8080/clientes/${clienteEditando.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(nuevoCliente),
+      })
+        .then(() => {
+          setClientes((prevClientes) =>
+            prevClientes.map((cliente) =>
+              cliente.id === clienteEditando.id ? { ...cliente, ...nuevoCliente } : cliente
+            )
+          );
+          setClienteEditando(null);
+          setView('tabla');
+        })
+        .catch((err) => console.error('Error al actualizar cliente:', err));
     } else {
-      setClientes([...clientes, nuevoCliente]);
+      // Crear un nuevo cliente
+      fetch('http://localhost:8080/clientes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(nuevoCliente),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setClientes([...clientes, data]);
+          setView('tabla');
+        })
+        .catch((err) => console.error('Error al crear cliente:', err));
     }
-
-    setView('tabla');
   };
 
   const handleEditCliente = (cliente) => {
@@ -44,7 +66,11 @@ const Clientes = () => {
   };
 
   const handleDeleteCliente = (id) => {
-    setClientes(clientes.filter((cliente) => cliente.id !== id));
+    fetch(`http://localhost:8080/clientes/${id}`, {
+      method: 'DELETE',
+    })
+      .then(() => setClientes(clientes.filter((cliente) => cliente.id !== id)))
+      .catch((err) => console.error('Error al eliminar cliente:', err));
   };
 
   const handleCancel = () => {
@@ -81,7 +107,7 @@ const Clientes = () => {
               <td>{cliente.telefono}</td>
               <td>{cliente.correo}</td>
               <td>{cliente.puntos}</td>
-              <td>{cliente.fechaCreacion}</td>
+              <td>{new Date(cliente.fechaCreacion).toLocaleDateString()}</td>
               <td className="action-buttons">
                 <button className="icon-button" onClick={() => handleEditCliente(cliente)}>
                   <FaEdit />

@@ -138,6 +138,13 @@
   background-color: #c9302c;
 }
 
+.form-error {
+  color: red;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
 /* Ajustes responsivos */
 @media (max-width: 768px) {
   .empleados-actions {

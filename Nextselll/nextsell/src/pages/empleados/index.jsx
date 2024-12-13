@@ -4,19 +4,31 @@ import { FaEdit, FaTrash } from 'react-icons/fa';
 
 const Empleados = () => {
   const [empleados, setEmpleados] = useState([]);
+  const [roles, setRoles] = useState([]);
   const [view, setView] = useState('tabla');
   const [empleadoEditando, setEmpleadoEditando] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Cargar datos de empleados desde el backend
+    // Cargar empleados desde el backend
+    setLoading(true);
     fetch('http://localhost:8080/empleados')
       .then((res) => res.json())
       .then((data) => setEmpleados(data))
-      .catch((err) => console.error('Error al cargar empleados:', err));
+      .catch((err) => console.error('Error al cargar empleados:', err))
+      .finally(() => setLoading(false));
+
+    // Cargar roles desde el backend
+    fetch('http://localhost:8080/roles')
+      .then((res) => res.json())
+      .then((data) => setRoles(data))
+      .catch((err) => console.error('Error al cargar roles:', err));
   }, []);
 
   const handleAddEmpleado = (e) => {
     e.preventDefault();
+    setError(null);
 
     const form = e.target;
     const nuevoEmpleado = {
@@ -27,35 +39,33 @@ const Empleados = () => {
       rol: form.rol.value,
     };
 
-    if (empleadoEditando) {
-      fetch(`http://localhost:8080/empleados/${empleadoEditando.id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(nuevoEmpleado),
+    const url = empleadoEditando
+      ? `http://localhost:8080/empleados/${empleadoEditando.id}`
+      : 'http://localhost:8080/empleados';
+
+    const method = empleadoEditando ? 'PUT' : 'POST';
+
+    fetch(url, {
+      method,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(nuevoEmpleado),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error('Error al guardar los datos del empleado');
+        return res.json();
       })
-        .then(() => {
-          setEmpleados((prevEmpleados) =>
-            prevEmpleados.map((empleado) =>
-              empleado.id === empleadoEditando.id ? { ...empleado, ...nuevoEmpleado } : empleado
-            )
+      .then((data) => {
+        if (empleadoEditando) {
+          setEmpleados((prev) =>
+            prev.map((emp) => (emp.id === empleadoEditando.id ? { ...emp, ...nuevoEmpleado } : emp))
           );
           setEmpleadoEditando(null);
-          setView('tabla');
-        })
-        .catch((err) => console.error('Error al actualizar empleado:', err));
-    } else {
-      fetch('http://localhost:8080/empleados', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(nuevoEmpleado),
+        } else {
+          setEmpleados((prev) => [...prev, data]);
+        }
+        setView('tabla');
       })
-        .then((res) => res.json())
-        .then((data) => {
-          setEmpleados([...empleados, data]);
-          setView('tabla');
-        })
-        .catch((err) => console.error('Error al agregar empleado:', err));
-    }
+      .catch((err) => setError(err.message));
   };
 
   const handleEditEmpleado = (empleado) => {
@@ -67,7 +77,7 @@ const Empleados = () => {
     fetch(`http://localhost:8080/empleados/${id}`, {
       method: 'DELETE',
     })
-      .then(() => setEmpleados(empleados.filter((empleado) => empleado.id !== id)))
+      .then(() => setEmpleados((prev) => prev.filter((empleado) => empleado.id !== id)))
       .catch((err) => console.error('Error al eliminar empleado:', err));
   };
 
@@ -117,6 +127,7 @@ const Empleados = () => {
   const renderFormulario = () => (
     <form className="empleados-form" onSubmit={handleAddEmpleado}>
       <h2 className="form-title">{empleadoEditando ? 'Editar Empleado' : 'Agregar Empleado'}</h2>
+      {error && <p className="form-error">Error: {error}</p>}
       <div className="form-group">
         <label htmlFor="nombre">Nombre:</label>
         <input
@@ -167,8 +178,11 @@ const Empleados = () => {
           <option value="" disabled>
             Seleccionar rol
           </option>
-          <option value="cajero">Cajero</option>
-          <option value="gerente">Gerente</option>
+          {roles.map((rol) => (
+            <option key={rol.id} value={rol.nombre}>
+              {rol.nombre}
+            </option>
+          ))}
         </select>
       </div>
       <div className="form-buttons">
@@ -185,8 +199,13 @@ const Empleados = () => {
   return (
     <div className="main-content">
       <h1 className="empleados-title">Gestión de Empleados</h1>
-      {view === 'tabla' && renderTabla()}
-      {view === 'formulario' && renderFormulario()}
+      {loading ? (
+        <p>Cargando empleados...</p>
+      ) : view === 'tabla' ? (
+        renderTabla()
+      ) : (
+        renderFormulario()
+      )}
     </div>
   );
 };

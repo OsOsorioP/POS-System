@@ -11,21 +11,22 @@ const Inventario = () => {
   const [productoEditando, setProductoEditando] = useState(null);
 
   useEffect(() => {
-    // Obtener datos desde el backend
-    fetch('http://localhost:8080/inventarios')
-      .then((res) => res.json())
-      .then((data) => setProductos(data))
-      .catch((err) => console.error('Error al cargar inventario:', err));
-
-    fetch('http://localhost:8080/categorias')
-      .then((res) => res.json())
-      .then((data) => setCategorias(data))
-      .catch((err) => console.error('Error al cargar categorías:', err));
-
-    fetch('http://localhost:8080/proveedores')
-      .then((res) => res.json())
-      .then((data) => setProveedores(data))
-      .catch((err) => console.error('Error al cargar proveedores:', err));
+    const fetchData = async () => {
+      try {
+        const [productosData, categoriasData, proveedoresData] = await Promise.all([
+          fetch('http://localhost:8080/inventarios').then((res) => res.json()),
+          fetch('http://localhost:8080/categorias').then((res) => res.json()),
+          fetch('http://localhost:8080/proveedores').then((res) => res.json()),
+        ]);
+        setProductos(productosData);
+        setCategorias(categoriasData);
+        setProveedores(proveedoresData);
+      } catch (err) {
+        console.error('Error al cargar datos:', err);
+        alert('Hubo un problema al cargar los datos. Intente nuevamente.');
+      }
+    };
+    fetchData();
   }, []);
 
   const handleAddProduct = (e) => {
@@ -39,6 +40,11 @@ const Inventario = () => {
       categoria: form.categoria.value,
       proveedor: form.proveedor.value,
     };
+
+    if (nuevoProducto.cantidad <= 0 || nuevoProducto.precio <= 0) {
+      alert('La cantidad y el precio deben ser números positivos.');
+      return;
+    }
 
     if (productoEditando) {
       fetch(`http://localhost:8080/inventarios/${productoEditando.id}`, {
@@ -55,8 +61,12 @@ const Inventario = () => {
           );
           setProductoEditando(null);
           setView('tabla');
+          alert('Producto actualizado correctamente.');
         })
-        .catch((err) => console.error('Error al actualizar producto:', err));
+        .catch((err) => {
+          console.error('Error al actualizar producto:', err);
+          alert('Hubo un problema al actualizar el producto.');
+        });
     } else {
       fetch('http://localhost:8080/inventarios', {
         method: 'POST',
@@ -67,8 +77,12 @@ const Inventario = () => {
         .then((newProduct) => {
           setProductos([...productos, newProduct]);
           setView('tabla');
+          alert('Producto agregado correctamente.');
         })
-        .catch((err) => console.error('Error al agregar producto:', err));
+        .catch((err) => {
+          console.error('Error al agregar producto:', err);
+          alert('Hubo un problema al agregar el producto.');
+        });
     }
   };
 
@@ -78,9 +92,17 @@ const Inventario = () => {
   };
 
   const handleDeleteProduct = (id) => {
-    fetch(`http://localhost:8080/inventarios/${id}`, { method: 'DELETE' })
-      .then(() => setProductos(productos.filter((producto) => producto.id !== id)))
-      .catch((err) => console.error('Error al eliminar producto:', err));
+    if (window.confirm('¿Está seguro de que desea eliminar este producto?')) {
+      fetch(`http://localhost:8080/inventarios/${id}`, { method: 'DELETE' })
+        .then(() => {
+          setProductos(productos.filter((producto) => producto.id !== id));
+          alert('Producto eliminado correctamente.');
+        })
+        .catch((err) => {
+          console.error('Error al eliminar producto:', err);
+          alert('Hubo un problema al eliminar el producto.');
+        });
+    }
   };
 
   const handleCancel = () => {
@@ -89,7 +111,10 @@ const Inventario = () => {
   };
 
   const filteredProductos = productos.filter((producto) =>
-    producto.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+    [producto.nombre, producto.categoria, producto.proveedor]
+      .join(' ')
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase())
   );
 
   const renderTabla = () => (
@@ -190,7 +215,7 @@ const Inventario = () => {
         <select id="categoria" name="categoria" defaultValue={productoEditando?.categoria || ''} required>
           <option value="">Seleccione una categoría</option>
           {categorias.map((categoria) => (
-            <option key={categoria.id} value={categoria.nombre}>
+            <option key={categoria.id} value={categoria.id}>
               {categoria.nombre}
             </option>
           ))}
@@ -201,7 +226,7 @@ const Inventario = () => {
         <select id="proveedor" name="proveedor" defaultValue={productoEditando?.proveedor || ''} required>
           <option value="">Seleccione un proveedor</option>
           {proveedores.map((proveedor) => (
-            <option key={proveedor.id} value={proveedor.nombre}>
+            <option key={proveedor.id} value={proveedor.id}>
               {proveedor.nombre}
             </option>
           ))}

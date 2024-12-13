@@ -33,6 +33,14 @@
   border: 1px solid #ddd;
 }
 
+.clientes-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.clientes-table tr.editing-row {
+  background-color: #e6f7ff; /* Azul claro */
+}
+
 .action-buttons {
   display: flex;
   gap: 10px;
@@ -124,7 +132,7 @@
 
 /* Botón de Crear Cliente */
 .add-client-button {
-  background-color: #0044B1; /* Azul institucional */
+  background-color: #0044B1;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -136,7 +144,7 @@
 }
 
 .add-client-button:hover {
-  background-color: #008C45; /* Verde institucional */
+  background-color: #008C45;
 }
 
 /* Mensajes de validación */
