@@ -1,0 +1,90 @@
+.sidebar {
+  width: 220px;
+  height: 100vh;
+  background-color: #0044B1; /* Fondo azul Pantone 293 C */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 30px;
+  text-align: center;
+  width: 100%;
+}
+
+.logo img {
+  max-width: 80%;
+  height: auto;
+  margin-bottom: 20px;
+  object-fit: contain;
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.nav-links li {
+  width: 100%;
+  text-align: center;
+}
+
+.nav-links a {
+  color: white;
+  background-color: #0044B1; /* Fondo azul por defecto */
+  text-decoration: none;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 500;
+  border: 2px solid transparent;
+  border-radius: 8px; /* Bordes redondeados */
+  transition: all 0.3s ease; /* Suavidad en el hover */
+  gap: 10px; /* Espaciado entre ícono y texto */
+}
+
+.nav-links a:hover {
+  background-color: white; /* Fondo blanco al pasar el mouse */
+  color: black; /* Texto negro al pasar el mouse */
+  border: 2px solid #0044B1; /* Borde azul */
+}
+
+.nav-links a.active {
+  background-color: white; /* Fondo blanco para el botón activo */
+  color: black; /* Texto negro para el botón activo */
+  border: 2px solid #0044B1; /* Borde azul */
+  font-weight: bold;
+}
+
+.nav-links a svg {
+  font-size: 20px;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 180px;
+  }
+
+  .logo img {
+    max-width: 70%;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+  }
+}

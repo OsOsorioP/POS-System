@@ -1,0 +1,124 @@
+/* General */
+.main-content {
+  margin-left: 120px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.report-title {
+  color: #0044b1;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Botones de opciones */
+.report-options {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.report-button {
+  background-color: #0044b1;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.report-button:hover {
+  background-color: #008c45;
+}
+
+/* Contenedor de reportes */
+.report-container {
+  margin-top: 20px;
+}
+
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.report-table th {
+  background-color: #0044b1;
+  color: white;
+  padding: 10px;
+  text-align: left;
+}
+
+.report-table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+/* Alternar colores para filas */
+.report-table tbody tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+.report-table tbody tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+.export-button {
+  background-color: #ff5722; /* Naranja intenso */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  margin-left: 10px;
+}
+
+.export-button:hover {
+  background-color: #d84315;
+}
+
+/* Mensajes de estado */
+.report-success {
+  color: green;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.report-error {
+  color: red;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .report-table {
+      font-size: 0.8rem;
+      overflow-x: auto;
+      display: block;
+      white-space: nowrap;
+  }
+
+  .report-options {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .report-button,
+  .export-button {
+      width: 90%;
+      margin-bottom: 10px;
+  }
+}

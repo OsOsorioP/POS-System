@@ -1,0 +1,161 @@
+.main-content {
+  margin-left: 120px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.empleados-title {
+  color: #0044B1;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.empleados-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.empleados-table th {
+  background-color: #0044B1;
+  color: white;
+  padding: 10px;
+  text-align: left;
+}
+
+.empleados-table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  color: #0044B1;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.icon-button:hover {
+  color: #008C45;
+}
+
+.add-employee-button {
+  background-color: #0044B1;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.add-employee-button:hover {
+  background-color: #008C45;
+}
+
+.empleados-form {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-title {
+  color: #0044B1;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.form-submit-button {
+  background-color: #008C45;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-submit-button:hover {
+  background-color: #0044B1;
+}
+
+.form-cancel-button {
+  background-color: #d9534f;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-cancel-button:hover {
+  background-color: #c9302c;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+  .empleados-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .add-employee-button {
+    width: 100%;
+  }
+
+  .empleados-form {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .empleados-table {
+    font-size: 0.9rem;
+  }
+}

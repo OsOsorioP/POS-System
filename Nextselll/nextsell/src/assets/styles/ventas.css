@@ -1,0 +1,167 @@
+/* Contenedor principal de ventas */
+.ventas-container {
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 1200px;
+  margin-left: 120px; /* Espacio para el Sidebar */
+}
+
+/* Título de la sección de ventas */
+.ventas-title {
+  font-size: 28px;
+  text-align: center;
+  color: #0044b1; /* Azul institucional */
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Botón para registrar ventas */
+.add-venta-button {
+  background-color: #0044b1; /* Azul institucional */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  float: right; /* Botón alineado a la derecha */
+}
+
+.add-venta-button:hover {
+  background-color: #003399; /* Azul más oscuro */
+}
+
+/* Barra de búsqueda */
+.search-bar {
+  width: 50%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* Tabla de ventas */
+.ventas-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.ventas-table th, .ventas-table td {
+  border: 1px solid #ddd;
+  text-align: left;
+  padding: 8px;
+}
+
+.ventas-table th {
+  background-color: #0044b1;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.ventas-table td {
+  text-align: center;
+}
+
+.no-results {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+/* Formulario de registro de ventas */
+.ventas-form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px; /* Ancho máximo */
+  margin: 20px auto; /* Centrar */
+}
+
+.ventas-form h2 {
+  text-align: center;
+  color: #0044b1;
+  margin-bottom: 20px;
+}
+
+.ventas-form .form-group {
+  margin-bottom: 15px;
+}
+
+.ventas-form .form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+  font-weight: bold;
+}
+
+.ventas-form .form-group select,
+.ventas-form .form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Botones del formulario */
+.ventas-form .form-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.form-submit-button {
+  background-color: #28a745; /* Verde */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form-submit-button:hover {
+  background-color: #218838;
+}
+
+.form-cancel-button {
+  background-color: #dc3545; /* Rojo */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form-cancel-button:hover {
+  background-color: #c82333;
+}
+
+/* Iconos de edición y eliminación */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.action-buttons .icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.action-buttons .icon-button:hover {
+  transform: scale(1.2);
+}
+
+.action-buttons .icon-button .edit-icon {
+  color: #0044b1; /* Azul */
+}
+
+.action-buttons .icon-button .delete-icon {
+  color: #dc3545; /* Rojo */
+}

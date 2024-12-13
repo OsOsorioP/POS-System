@@ -1,0 +1,124 @@
+/* Contenedor principal del login */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #0044b1, #008c45);
+  }
+  
+  /* Formulario */
+  .login-form {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Animación decorativa */
+  .login-form::before {
+    content: "";
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: 200px;
+    height: 200px;
+    background: rgba(0, 68, 177, 0.15);
+    border-radius: 50%;
+    z-index: -1;
+  }
+  
+  .login-form::after {
+    content: "";
+    position: absolute;
+    bottom: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    background: rgba(0, 140, 69, 0.15);
+    border-radius: 50%;
+    z-index: -1;
+  }
+  
+  /* Título */
+  .login-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #0044b1;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  /* Grupo de entrada */
+  .form-group {
+    margin-bottom: 25px;
+    text-align: left;
+  }
+  
+  .form-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .form-group input:focus {
+    border-color: #0044b1;
+    box-shadow: 0 0 5px rgba(0, 68, 177, 0.5);
+    outline: none;
+  }
+  
+  /* Botón */
+  .login-button {
+    background: #0044b1;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  
+  .login-button:hover {
+    background: #008c45;
+    transform: scale(1.05);
+  }
+  
+  .login-button:active {
+    transform: scale(1);
+  }
+  
+  /* Texto adicional (opcional) */
+  .extra-text {
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: #555;
+  }
+  
+  .extra-text a {
+    color: #0044b1;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .extra-text a:hover {
+    text-decoration: underline;
+  }
+  

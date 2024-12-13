@@ -1,0 +1,34 @@
+/* Global styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #cecece; /* Fondo gris claro */
+}
+
+/* Contenedor principal */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  flex: 0 0 200px;
+  background-color: #0044b1; /* Azul institucional */
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* Asegura que los títulos no interfieran con los estilos específicos */
+h1, h2, h3, h4, p, label {
+  margin: 0 0 10px;
+  color: inherit; /* Permite que los colores específicos en CSS locales prevalezcan */
+}
+
+input, button {
+  font-family: inherit;
+  font-size: inherit;
+}

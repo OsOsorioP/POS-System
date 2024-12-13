@@ -1,0 +1,68 @@
+/* General */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0; /* Gris claro */
+}
+
+/* Contenedor principal */
+.welcome-container {
+  margin-left: 110px; /* Para coincidir con el sidebar */
+  padding: 40px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  min-height: calc(100vh - 80px); /* Para ocupar toda la altura del contenido */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Título principal con degradado animado */
+.welcome-title {
+  font-size: 5rem; /* Tamaño más grande */
+  font-family: 'Georgia', serif; /* Tipografía elegante */
+  font-weight: bold;
+  background: linear-gradient(90deg, #0044B1, #008C45, #0044B1);
+  background-size: 300%; /* Para la animación */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientMove 5s infinite; /* Animación del degradado */
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Animación de degradado */
+@keyframes gradientMove {
+  0% {
+    background-position: 0%;
+  }
+  50% {
+    background-position: 100%;
+  }
+  100% {
+    background-position: 0%;
+  }
+}
+
+/* Subtítulo con animación */
+.welcome-subtitle {
+  font-size: 2rem; /* Tamaño aumentado */
+  font-family: 'Verdana', sans-serif; /* Tipografía profesional */
+  color: #333; /* Color más oscuro para mejor contraste */
+  margin-top: 10px;
+  text-align: center;
+  animation: fadeIn 2s ease-in; /* Animación de entrada */
+}
+
+/* Animación de aparición */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
